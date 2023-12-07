@@ -7,10 +7,10 @@ Prometheus exporter implementations
 
 # Docker images:
 
-|  Image      | Registry                                                                     |
-|-------------|------------------------------------------------------------------------------|
-| Grafana     |    https://hub.docker.com/repository/docker/dejanualex/grafana/general       |
-| Prometheus  |                                                                              |
+|  Image             | Registry                                                                     |
+|--------------------|------------------------------------------------------------------------------|
+| Grafana    9.5.2   |    https://hub.docker.com/repository/docker/rcc650/grafana/general           |
+| Prometheus 2.48.0  |    https://hub.docker.com/repository/docker/rcc650/prometheus/general        |
 
 * Start setup locally:
 
