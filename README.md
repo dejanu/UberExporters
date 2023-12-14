@@ -25,4 +25,4 @@ docker-compose -f docker-compose.yaml up -d
 docker-compose -f docker-compose.yaml up --build
 
 ```
-🐱‍💻 Grafana should be accessible on [localhost:3000](http://127.0.0.1:3000) and Prometheus on [localhost:9090](http://127.0.0.1:9090)
+🐱‍💻 Grafana should be accessible on [localhost:3000](http://127.0.0.1:3000) and Prometheus on [localhost:9090](http://127.0.0.1:9090) and the exporter on [localhost:8080](http://127.0.0.1:8080)
