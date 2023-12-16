@@ -24,13 +24,9 @@ def queryMaxConnections(cursor):
 
 if __name__ == '__main__':
 
-
     gauge_active_conn = Gauge('database_connections_active', 'Number of active database connections')
     gauge_max_conn = Gauge('database_connections_max', 'Number of maximum set maximum database ')
 
-
-
-    # print(queryActiveConnections())
     # Start up the server to expose the metrics.
     start_http_server(8000)
     # Generate some requests.

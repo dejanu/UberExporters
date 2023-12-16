@@ -27,6 +27,8 @@ services:
     volumes:
       - ./grafana_volume/grafana.ini:/etc/grafana/grafana.ini
       - ./grafana_volume/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana_volume/dashboards:/var/lib/grafana/dashboards
+      - ./grafana_volume/dashboards.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       # - ./grafana.db:/var/lib/grafana/grafana.db
     depends_on:
       - prometheus
@@ -51,7 +53,7 @@ services:
       context: ./exporters/postgres_exporter/
     container_name: localpostgresexporter
     ports:
-      - 8080:8000
+      - 8000:8000
     networks:
       - monitor-net
     restart: always
