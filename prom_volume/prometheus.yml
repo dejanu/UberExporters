@@ -8,3 +8,8 @@ scrape_configs:
   # metrics defaults to /metrics scheme defaults to http
     static_configs:
       -  targets: ['localhost:9090']
+
+  - job_name: 'postgres_exporter'
+  # metrics defaults to /metrics scheme defaults to http
+    static_configs:
+      - targets: ['postgres_exporter:8000']

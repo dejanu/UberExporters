@@ -1,4 +1,8 @@
 version: '3.4'
+
+networks:
+  monitor-net:
+
 services:
   prometheus:
     image: "prom/prometheus:${PROMETHEUS_VERSION}"
@@ -11,6 +15,8 @@ services:
     command:
       - '--web.enable-lifecycle'
       - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - monitor-net
     restart: always
 
   grafana:
@@ -21,9 +27,36 @@ services:
     volumes:
       - ./grafana_volume/grafana.ini:/etc/grafana/grafana.ini
       - ./grafana_volume/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana_volume/dashboards:/var/lib/grafana/dashboards
+      - ./grafana_volume/dashboards.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       # - ./grafana.db:/var/lib/grafana/grafana.db
     depends_on:
       - prometheus
-    links:
-      - prometheus
+    networks:
+      - monitor-net
     restart: always
+
+  postgres_db:
+    image: "postgres:${POSTGRES_VERSION}"
+    container_name: localpostgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: "password123"
+    networks:
+      - monitor-net
+    healthcheck:
+      test: ["CMD-SHELL", " netstat -an | grep -q 5432"]
+
+  postgres_exporter:
+    build:
+      context: ./exporters/postgres_exporter/
+    container_name: localpostgresexporter
+    ports:
+      - 8000:8000
+    networks:
+      - monitor-net
+    restart: always
+    depends_on:
+      postgres_db:
+        condition: service_healthy
