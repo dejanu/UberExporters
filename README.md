@@ -16,7 +16,7 @@ Prometheus exporter implementations
 
 ```bash
 # check setup
-docker-compose -f docker-compose config
+docker-compose -f docker-compose.yaml config
 # foreground
 docker-compose -f docker-compose.yaml up
 # background
